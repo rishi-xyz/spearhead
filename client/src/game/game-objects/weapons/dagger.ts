@@ -1,7 +1,7 @@
 import { BaseWeapon, WeaponAttackAnimationConfig } from './base-weapon';
-import { DIRECTION } from '../../common/common';
+import { DIRECTION } from '../../shared/common';
 import { WeaponComponent } from '../../components/game-object/weapon-component';
-import { ASSET_KEYS } from '../../common/assets';
+import { ASSET_KEYS } from '../../shared/assets';
 
 export class Dagger extends BaseWeapon {
   #weaponSprite: Phaser.GameObjects.Sprite;

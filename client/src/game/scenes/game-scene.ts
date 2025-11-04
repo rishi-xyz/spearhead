@@ -1,13 +1,13 @@
 import * as Phaser from 'phaser';
 import { SCENE_KEYS } from './scene-keys';
-import { ASSET_KEYS, CHEST_REWARD_TO_TEXTURE_FRAME } from '../shared/assests';
+import { ASSET_KEYS, CHEST_REWARD_TO_TEXTURE_FRAME } from '../shared/assets';
 import { Player } from '../game-objects/player/player';
 import { KeyboardComponent } from '../components/input/keyboard-component';
 import { Spider } from '../game-objects/enemies/spider';
 import { Wisp } from '../game-objects/enemies/wisp';
 import { CharacterGameObject } from '../game-objects/common/character-game-object';
 import { CHEST_REWARD_TO_DIALOG_MAP, DIRECTION } from '../shared/common';
-import * as CONFIG from '../shared/game-config';
+import * as CONFIG from '../shared/config';
 import { Pot } from '../game-objects/objects/pot';
 import { Chest } from '../game-objects/objects/chest';
 import { GameObject, LevelData } from '../shared/types';

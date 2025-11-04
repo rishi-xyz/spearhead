@@ -1,8 +1,8 @@
 import * as Phaser from 'phaser';
-import { SwitchAction, TiledSwitchObject } from '../../common/tiled/types';
-import { CustomGameObject } from '../../common/types';
-import { SWITCH_TEXTURE } from '../../common/tiled/common';
-import { ASSET_KEYS, BUTTON_FRAME_KEYS } from '../../common/assets';
+import { SwitchAction, TiledSwitchObject } from '../../shared/tiled/types';
+import { CustomGameObject } from '../../shared/types';
+import { SWITCH_TEXTURE } from '../../shared/tiled/common';
+import { ASSET_KEYS, BUTTON_FRAME_KEYS } from '../../shared/assets';
 
 type ButtonPressedEvent = {
   action: SwitchAction;

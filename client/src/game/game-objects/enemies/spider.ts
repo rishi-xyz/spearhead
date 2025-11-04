@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import { Direction, Position } from '../../common/types';
+import { Direction, Position } from '../../shared/types';
 import { InputComponent } from '../../components/input/input-component';
 import { IdleState } from '../../components/state-machine/states/character/idle-state';
 import { CHARACTER_STATES } from '../../components/state-machine/states/character/character-states';
@@ -11,12 +11,12 @@ import {
   ENEMY_SPIDER_HURT_PUSH_BACK_SPEED,
   ENEMY_SPIDER_MAX_HEALTH,
   ENEMY_SPIDER_SPEED,
-} from '../../common/config';
+} from '../../shared/config';
 import { AnimationConfig } from '../../components/game-object/animation-component';
-import { ASSET_KEYS, SPIDER_ANIMATION_KEYS } from '../../common/assets';
+import { ASSET_KEYS, SPIDER_ANIMATION_KEYS } from '../../shared/assets';
 import { CharacterGameObject } from '../common/character-game-object';
-import { DIRECTION } from '../../common/common';
-import { exhaustiveGuard } from '../../common/utils';
+import { DIRECTION } from '../../shared/common';
+import { exhaustiveGuard } from '../../shared/utils';
 import { HurtState } from '../../components/state-machine/states/character/hurt-state';
 import { DeathState } from '../../components/state-machine/states/character/death-state';
 

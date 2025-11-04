@@ -1,12 +1,12 @@
 import * as Phaser from 'phaser';
-import { ASSET_KEYS, CHEST_FRAME_KEYS } from '../../common/assets';
-import { CHEST_STATE, INTERACTIVE_OBJECT_TYPE, LEVEL_NAME } from '../../common/common';
-import { ChestState, CustomGameObject } from '../../common/types';
+import { ASSET_KEYS, CHEST_FRAME_KEYS } from '../../shared/assets';
+import { CHEST_STATE, INTERACTIVE_OBJECT_TYPE } from '../../shared/common';
+import { ChestState, CustomGameObject } from '../../shared/types';
 import { InteractiveObjectComponent } from '../../components/game-object/interactive-object-component';
-import { ChestReward, TiledChestObject, TrapType } from '../../common/tiled/types';
-import { TRAP_TYPE } from '../../common/tiled/common';
+import { ChestReward, TiledChestObject, TrapType } from '../../shared/tiled/types';
+import { TRAP_TYPE } from '../../shared/tiled/common';
 import { InventoryManager } from '../../components/inventory/inventory-manager';
-import { DataManager } from '../../common/data-manager';
+import { DataManager } from '../../shared/data-manager';
 
 export class Chest extends Phaser.Physics.Arcade.Image implements CustomGameObject {
   #state: ChestState;

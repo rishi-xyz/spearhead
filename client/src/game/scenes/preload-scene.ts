@@ -1,6 +1,6 @@
 import { Scene } from 'phaser';
 import { SCENE_KEYS } from "./scene-keys";
-import { ASSET_PACK_KEYS, ASSET_KEYS } from "../shared/assests";
+import { ASSET_PACK_KEYS, ASSET_KEYS } from "../shared/assets";
 import { LevelData } from '../shared/types';
 import { DataManager } from '../shared/data-manager';
 

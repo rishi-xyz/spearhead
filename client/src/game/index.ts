@@ -1,3 +1,4 @@
+import { GameScene } from './scenes/game-scene';
 import { PreloadScene } from './scenes/preload-scene';
 import { Game, Types, WEBGL, Scale } from 'phaser';
 
@@ -22,7 +23,8 @@ const config: Types.Core.GameConfig = {
         },  
     },
     scene: [
-        PreloadScene
+        PreloadScene,
+        GameScene
     ]
 };
 

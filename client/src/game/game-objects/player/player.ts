@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import { GameObject, Position } from '../../common/types';
+import { GameObject, Position } from '../../shared/types';
 import { InputComponent } from '../../components/input/input-component';
 import { IdleState } from '../../components/state-machine/states/character/idle-state';
 import { CHARACTER_STATES } from '../../components/state-machine/states/character/character-states';
@@ -9,12 +9,12 @@ import {
   PLAYER_HURT_PUSH_BACK_SPEED,
   PLAYER_INVULNERABLE_AFTER_HIT_DURATION,
   PLAYER_SPEED,
-} from '../../common/config';
+} from '../../shared/config';
 import { AnimationConfig } from '../../components/game-object/animation-component';
-import { ASSET_KEYS, PLAYER_ANIMATION_KEYS } from '../../common/assets';
+import { ASSET_KEYS, PLAYER_ANIMATION_KEYS } from '../../shared/assets';
 import { CharacterGameObject } from '../common/character-game-object';
 import { HurtState } from '../../components/state-machine/states/character/hurt-state';
-import { flash } from '../../common/juice-utils';
+import { flash } from '../../shared/juice-utils';
 import { DeathState } from '../../components/state-machine/states/character/death-state';
 import { CollidingObjectsComponent } from '../../components/game-object/colliding-objects-component';
 import { LiftState } from '../../components/state-machine/states/character/lift-state';

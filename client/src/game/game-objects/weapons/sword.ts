@@ -1,5 +1,5 @@
 import { BaseWeapon } from './base-weapon';
-import { DIRECTION } from '../../common/common';
+import { DIRECTION } from '../../shared/common';
 
 export class Sword extends BaseWeapon {
   public attackUp(): void {

@@ -1,5 +1,5 @@
 import {Types} from 'phaser';
-import { ASSET_KEYS } from './assests';
+import { ASSET_KEYS } from './assets';
 
 export const DIRECTION = {
   UP: 'UP',

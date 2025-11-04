@@ -1,5 +1,5 @@
 import { LEVEL_NAME } from './common';
-import { PLAYER_START_MAX_HEALTH } from './game-config';
+import { PLAYER_START_MAX_HEALTH } from './config';
 import {
   CUSTOM_EVENTS,
   EventBus,

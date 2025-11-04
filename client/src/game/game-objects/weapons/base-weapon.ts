@@ -1,4 +1,4 @@
-import { Direction } from '../../common/types';
+import { Direction } from '../../shared/types';
 import { WeaponComponent } from '../../components/game-object/weapon-component';
 
 export interface Weapon {

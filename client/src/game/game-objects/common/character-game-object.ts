@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import { CustomGameObject, Direction, Position } from '../../common/types';
+import { CustomGameObject, Direction, Position } from '../../shared/types';
 import { InputComponent } from '../../components/input/input-component';
 import { ControlsComponent } from '../../components/game-object/controls-component';
 import { StateMachine } from '../../components/state-machine/state-machine';
@@ -9,7 +9,7 @@ import { AnimationComponent, AnimationConfig } from '../../components/game-objec
 import { InvulnerableComponent } from '../../components/game-object/invulnerable-component';
 import { CHARACTER_STATES } from '../../components/state-machine/states/character/character-states';
 import { LifeComponent } from '../../components/game-object/life-component';
-import { DataManager } from '../../common/data-manager';
+import { DataManager } from '../../shared/data-manager';
 import { WeaponComponent } from '../../components/game-object/weapon-component';
 
 export type CharacterConfig = {
