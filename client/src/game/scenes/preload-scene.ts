@@ -16,4 +16,5 @@ export class PreloadScene extends Scene {
 
     public create(): void {
     }
+    
 }
