@@ -1,7 +1,7 @@
-import { DIRECTION } from '../../common/common';
-import { THROW_ITEM_DELAY_BEFORE_CALLBACK, THROW_ITEM_SPEED } from '../../common/config';
-import { Direction, GameObject } from '../../common/types';
-import { exhaustiveGuard, isArcadePhysicsBody, isCustomGameObject } from '../../common/utils';
+import { DIRECTION } from '../../shared/common';
+import { THROW_ITEM_DELAY_BEFORE_CALLBACK, THROW_ITEM_SPEED } from '../../shared/config';
+import { Direction, GameObject } from '../../shared/types';
+import { exhaustiveGuard, isArcadePhysicsBody, isCustomGameObject } from '../../shared/utils';
 import { BaseGameObjectComponent } from './base-game-object-component';
 
 export class ThrowableObjectComponent extends BaseGameObjectComponent {

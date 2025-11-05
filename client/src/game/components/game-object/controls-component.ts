@@ -1,4 +1,4 @@
-import { GameObject } from '../../common/types';
+import { GameObject } from '../../shared/types';
 import { InputComponent } from '../input/input-component';
 import { BaseGameObjectComponent } from './base-game-object-component';
 

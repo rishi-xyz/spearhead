@@ -1,4 +1,4 @@
-import { CharacterAnimation, GameObject } from '../../common/types';
+import { CharacterAnimation, GameObject } from '../../shared/types';
 import { BaseGameObjectComponent } from './base-game-object-component';
 
 export type AnimationConfig = {

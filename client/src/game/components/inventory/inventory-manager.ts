@@ -1,6 +1,6 @@
-import { DUNGEON_ITEM } from '../../common/common';
-import { DungeonItem, LevelName } from '../../common/types';
-import { exhaustiveGuard } from '../../common/utils';
+import { DUNGEON_ITEM } from '../../shared/common';
+import { DungeonItem, LevelName } from '../../shared/types';
+import { exhaustiveGuard } from '../../shared/utils';
 
 type AreaInventory = {
   map: boolean;

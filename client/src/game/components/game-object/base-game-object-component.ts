@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import { GameObject } from '../../common/types';
+import { GameObject } from '../../shared/types';
 
 export class BaseGameObjectComponent {
   protected scene: Phaser.Scene;
@@ -12,14 +12,14 @@ export class BaseGameObjectComponent {
   }
 
   static getComponent<T>(gameObject: GameObject): T {
-    return gameObject[`_${this.name}`] as T;
+    return (gameObject as any)[`_${this.name}`] as T;
   }
 
   static removeComponent(gameObject: GameObject): void {
-    delete gameObject[`_${this.name}`];
+    delete (gameObject as any)[`_${this.name}`];
   }
 
   protected assignComponentToObject(object: GameObject | Phaser.Physics.Arcade.Body): void {
-    object[`_${this.constructor.name}`] = this;
+    (object as any)[`_${this.constructor.name}`] = this;
   }
 }

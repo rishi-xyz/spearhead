@@ -1,4 +1,4 @@
-import { GameObject } from '../../common/types';
+import { GameObject } from '../../shared/types';
 import { BaseGameObjectComponent } from './base-game-object-component';
 
 export class InvulnerableComponent extends BaseGameObjectComponent {

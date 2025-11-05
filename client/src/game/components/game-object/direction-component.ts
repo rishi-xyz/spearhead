@@ -1,5 +1,5 @@
-import { DIRECTION } from '../../common/common';
-import { Direction, GameObject } from '../../common/types';
+import { DIRECTION } from '../../shared/common';
+import { Direction, GameObject } from '../../shared/types';
 import { BaseGameObjectComponent } from './base-game-object-component';
 
 export class DirectionComponent extends BaseGameObjectComponent {
