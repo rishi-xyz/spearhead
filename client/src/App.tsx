@@ -1,5 +1,7 @@
 import { useRef } from "react";
 import { IRefPhaserGame, PhaserGame } from "./PhaserGame";
+import ConnectWalletButton from "./ui/ConnectWalletButton";
+import WalletGuard from "./ui/WalletGuard";
 
 function App() {
     const phaserRef = useRef<IRefPhaserGame | null>(null);
@@ -10,13 +12,14 @@ function App() {
                 <div className="text-lg font-semibold tracking-wider">
                     SpearHead
                 </div>
-                {/* Reown AppKit connect button (connects to configured networks e.g., somniaTestnet) */}
-                <appkit-button></appkit-button>
+                <ConnectWalletButton />
             </header>
 
             <div className=" flex-2">
                 <PhaserGame ref={phaserRef} />
             </div>
+
+            <WalletGuard />
         </div>
     );
 }
