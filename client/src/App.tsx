@@ -10,9 +10,8 @@ function App() {
                 <div className="text-lg font-semibold tracking-wider">
                     SpearHead
                 </div>
-                <button className="bg-white/10 border border-white p-2 rounded-2xl cursor-pointer hover:text-black hover:bg-white">
-                    Connect Wallet
-                </button>
+                {/* Reown AppKit connect button (connects to configured networks e.g., somniaTestnet) */}
+                <appkit-button></appkit-button>
             </header>
 
             <div className=" flex-2">
