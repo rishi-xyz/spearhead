@@ -6,7 +6,7 @@ import { KeyboardComponent } from '../components/input/keyboard-component';
 import { Spider } from '../game-objects/enemies/spider';
 import { Wisp } from '../game-objects/enemies/wisp';
 import { CharacterGameObject } from '../game-objects/common/character-game-object';
-import { CHEST_REWARD_TO_DIALOG_MAP, DIRECTION } from '../shared/common';
+import { CHEST_REWARD_TO_DIALOG_MAP, DIRECTION, DUNGEON_ITEM } from '../shared/common';
 import * as CONFIG from '../shared/config';
 import { Pot } from '../game-objects/objects/pot';
 import { Chest } from '../game-objects/objects/chest';
@@ -258,6 +258,7 @@ export class GameScene extends Phaser.Scene {
 
   #registerCustomEvents(): void {
     EventBus.on(CUSTOM_EVENTS.OPENED_CHEST, this.#handleOpenChest, this);
+    EventBus.on(CUSTOM_EVENTS.QUIZ_ANSWERED, this.#handleQuizAnswered, this);
     EventBus.on(CUSTOM_EVENTS.ENEMY_DESTROYED, this.#checkForAllEnemiesAreDefeated, this);
     EventBus.on(CUSTOM_EVENTS.PLAYER_DEFEATED, this.#handlePlayerDefeatedEvent, this);
     EventBus.on(CUSTOM_EVENTS.DIALOG_CLOSED, this.#handleDialogClosed, this);
@@ -265,6 +266,7 @@ export class GameScene extends Phaser.Scene {
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       EventBus.off(CUSTOM_EVENTS.OPENED_CHEST, this.#handleOpenChest, this);
+      EventBus.off(CUSTOM_EVENTS.QUIZ_ANSWERED, this.#handleQuizAnswered, this);
       EventBus.off(CUSTOM_EVENTS.ENEMY_DESTROYED, this.#checkForAllEnemiesAreDefeated, this);
       EventBus.off(CUSTOM_EVENTS.PLAYER_DEFEATED, this.#handlePlayerDefeatedEvent, this);
       EventBus.off(CUSTOM_EVENTS.DIALOG_CLOSED, this.#handleDialogClosed, this);
@@ -272,16 +274,22 @@ export class GameScene extends Phaser.Scene {
     });
   }
 
+  #pendingKeyChest?: Chest;
+
   #handleOpenChest(chest: Chest): void {
-    // update data manager so we can persist chest state
+    if (chest.contents === DUNGEON_ITEM.SMALL_KEY) {
+      this.#pendingKeyChest = chest;
+      EventBus.emit(CUSTOM_EVENTS.SHOW_QUIZ);
+      return;
+    }
+
+    this.#pendingKeyChest = undefined;
     DataManager.instance.updateChestData(this.#currentRoomId, chest.id, true, true);
 
     if (chest.contents !== CHEST_REWARD.NOTHING) {
-      // updated game inventory
       InventoryManager.instance.addDungeonItem(this.#levelData.level, chest.contents);
     }
 
-    // show reward from chest
     this.#rewardItem
       .setFrame(CHEST_REWARD_TO_TEXTURE_FRAME[chest.contents])
       .setVisible(true)
@@ -297,6 +305,39 @@ export class GameScene extends Phaser.Scene {
       },
     });
   }
+
+  #handleQuizAnswered = (data: { correct: boolean }): void => {
+    if (!this.#pendingKeyChest) {
+      return;
+    }
+
+    const chest = this.#pendingKeyChest;
+
+    if (!data.correct) {
+      EventBus.emit(CUSTOM_EVENTS.SHOW_QUIZ);
+      return;
+    }
+
+    DataManager.instance.updateChestData(this.#currentRoomId, chest.id, true, true);
+    if (chest.contents !== CHEST_REWARD.NOTHING) {
+      InventoryManager.instance.addDungeonItem(this.#levelData.level, chest.contents);
+    }
+
+    this.#rewardItem
+      .setFrame(CHEST_REWARD_TO_TEXTURE_FRAME[chest.contents])
+      .setVisible(true)
+      .setPosition(chest.x, chest.y);
+
+    this.tweens.add({
+      targets: this.#rewardItem,
+      y: this.#rewardItem.y - 16,
+      duration: 500,
+      onComplete: () => {
+        EventBus.emit(CUSTOM_EVENTS.SHOW_DIALOG, CHEST_REWARD_TO_DIALOG_MAP[chest.contents]);
+        this.scene.pause();
+      },
+    });
+  };
 
   #createLevel(): void {
     // create main background

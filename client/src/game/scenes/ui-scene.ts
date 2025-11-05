@@ -50,7 +50,6 @@ export class UiScene extends Phaser.Scene {
     this.#dialogContainer.add(this.#dialogContainerText);
     this.#dialogContainer.visible = false;
 
-    // register event listeners
     EventBus.on(CUSTOM_EVENTS.PLAYER_HEALTH_UPDATED, this.updateHealthInHud, this);
     EventBus.on(CUSTOM_EVENTS.SHOW_DIALOG, this.showDialog, this);
 

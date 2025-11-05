@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
 import StartGame from './game';
 import { EventBus } from './game/EventBus';
+import QuizOverlay from './ui/QuizOverlay';
 
 export interface IRefPhaserGame
 {
@@ -74,7 +75,10 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
     }, [currentActiveScene, ref]);
 
     return (
-        <div id="game-container"></div>
+        <div style={{ position: 'relative' }}>
+            <div id="game-container"></div>
+            <QuizOverlay getGame={() => game.current} />
+        </div>
     );
 
 });
