@@ -17,7 +17,7 @@ export class PreloadScene extends Scene {
     }
 
     public create(): void {
-        this.createAnimations();
+        this.#createAnimations();
         const sceneData: LevelData = {
             level:DataManager.instance.data.currentArea.name,
             roomId:DataManager.instance.data.currentArea.startRoomId,
@@ -26,7 +26,7 @@ export class PreloadScene extends Scene {
         this.scene.start(SCENE_KEYS.GAME_SCENE, sceneData)
     }
 
-    private createAnimations(): void {
+    #createAnimations(): void {
         this.anims.createFromAseprite(ASSET_KEYS.HUD_NUMBERS);
         this.anims.createFromAseprite(ASSET_KEYS.PLAYER);
         this.anims.createFromAseprite(ASSET_KEYS.SPIDER);
