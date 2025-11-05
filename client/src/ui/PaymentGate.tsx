@@ -47,8 +47,6 @@ export default function PaymentGate() {
   const token = getTokenAddress()
   const decimals = getTokenDecimals()
 
-  const paidKey = address ? `stt_paid_${address.toLowerCase()}` : undefined
-  const isAlreadyPaid = paidKey ? localStorage.getItem(paidKey) === '1' : false
 
   // Wagmi actions
   const sendNative = useSendTransaction()
@@ -73,8 +71,8 @@ export default function PaymentGate() {
 
   useEffect(() => {
     // Verbose logs to help diagnose why the gate may not be visible
-    console.debug('[PaymentGate] isConnected=', isConnected, 'master=', master, 'token=', token, 'paidKey=', paidKey, 'isAlreadyPaid=', isAlreadyPaid)
-    if (isConnected && !isAlreadyPaid) {
+    console.debug('[PaymentGate] isConnected=', isConnected, 'master=', master, 'token=', token)
+    if (isConnected) {
       // Show even if master is missing, but surface an inline config error
       setShow(true)
       pauseGame()
@@ -83,17 +81,16 @@ export default function PaymentGate() {
       resumeGame()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isConnected, master, isAlreadyPaid])
+  }, [isConnected, master])
 
   useEffect(() => {
-    if (receipt.data?.status === 'success' && paidKey) {
-      localStorage.setItem(paidKey, '1')
+    if (receipt.data?.status === 'success') {
       setShow(false)
       setError(null)
       resumeGame()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [receipt.data?.status, paidKey])
+  }, [receipt.data?.status])
 
   const pay = async () => {
     if (!master) {
@@ -102,9 +99,9 @@ export default function PaymentGate() {
     }
     setError(null)
     try {
-      // Amount: 0.5 STT
+      // Amount: 0.1 STT
       if (token) {
-        const value = parseUnits('0.5', decimals)
+        const value = parseUnits('0.1', decimals)
         const hash = await writeErc20.writeContractAsync({
           abi: ERC20_ABI,
           address: token as `0x${string}`,
@@ -113,7 +110,7 @@ export default function PaymentGate() {
         })
         setTxHash(hash)
       } else {
-        const value = parseEther('0.5')
+        const value = parseEther('0.1')
         const hash = await sendNative.sendTransactionAsync({
           to: master as `0x${string}`,
           value,
@@ -188,7 +185,7 @@ export default function PaymentGate() {
           </div>
 
           <div style={{ fontFamily: 'Press Start 2P, monospace', fontSize: 11, opacity: 0.9, lineHeight: 1.7, marginBottom: 16 }}>
-            Send <strong>0.5 STT</strong> to unlock the game.
+            Send <strong>0.1 STT</strong> to unlock the game.
           </div>
 
           <div style={{ fontFamily: 'monospace', fontSize: 11, opacity: 0.8, marginBottom: 18 }}>
@@ -210,7 +207,7 @@ export default function PaymentGate() {
                 cursor: 'pointer',
               }}
             >
-              {sendNative.isPending || writeErc20.isPending ? 'Confirm in wallet...' : 'Pay 0.5 STT'}
+              {sendNative.isPending || writeErc20.isPending ? 'Confirm in wallet...' : 'Pay 0.1 STT'}
             </button>
 
             {txHash && (
