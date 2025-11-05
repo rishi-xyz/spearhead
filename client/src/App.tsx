@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { IRefPhaserGame, PhaserGame } from "./PhaserGame";
 import ConnectWalletButton from "./ui/ConnectWalletButton";
 import WalletGuard from "./ui/WalletGuard";
+import PaymentGate from "./ui/PaymentGate";
 
 function App() {
     const phaserRef = useRef<IRefPhaserGame | null>(null);
@@ -20,6 +21,7 @@ function App() {
             </div>
 
             <WalletGuard />
+            <PaymentGate />
         </div>
     );
 }

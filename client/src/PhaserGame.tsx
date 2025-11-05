@@ -24,6 +24,7 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
         {
 
             game.current = StartGame("game-container");
+            (window as any).__phaserGame = game.current;
 
             if (typeof ref === 'function')
             {
@@ -43,6 +44,9 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
                 if (game.current !== null)
                 {
                     game.current = null;
+                }
+                if ((window as any).__phaserGame) {
+                    (window as any).__phaserGame = undefined;
                 }
             }
         }
