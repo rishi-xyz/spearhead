@@ -10,13 +10,14 @@ const config: Types.Core.GameConfig = {
     roundPixels:true,
     scale: {
         parent: "game-container",
-        width: 256,
-        height: 224,
-        autoCenter:Scale.CENTER_BOTH,
+        width: 800,
+        height: 800,
+        autoCenter: Scale.CENTER_BOTH,
         mode: Scale.ScaleModes.HEIGHT_CONTROLS_WIDTH,
+        max: { width: 800, height: 800 },
     },
     parent: 'game-container',
-    backgroundColor: '#d2d2d2',
+    backgroundColor: '#dddddd',
     physics: {
         default: "arcade",
         arcade: {

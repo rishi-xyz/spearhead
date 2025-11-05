@@ -106,6 +106,8 @@ export class GameScene extends Phaser.Scene {
     this.#registerCustomEvents();
 
     this.scene.launch(SCENE_KEYS.UI_SCENE);
+
+    this.scale.on(Phaser.Scale.Events.RESIZE, this.#onResize, this);
   }
 
   #registerColliders(): void {
@@ -404,10 +406,26 @@ export class GameScene extends Phaser.Scene {
   }
 
   #setupCamera(): void {
-    // updates for camera to stay with level
     const roomSize = this.#objectsByRoomId[this.#levelData.roomId].room;
     this.cameras.main.setBounds(roomSize.x, roomSize.y - roomSize.height, roomSize.width, roomSize.height);
+    const canvasW = this.scale.width;
+    const canvasH = this.scale.height;
+    const zoomX = canvasW / roomSize.width;
+    const zoomY = canvasH / roomSize.height;
+    const zoom = Math.min(zoomX, zoomY);
+    this.cameras.main.setZoom(zoom);
     this.cameras.main.startFollow(this.#player);
+  }
+
+  #onResize(): void {
+    const roomSize = this.#objectsByRoomId[this.#currentRoomId].room;
+    const canvasW = this.scale.width;
+    const canvasH = this.scale.height;
+    const zoomX = canvasW / roomSize.width;
+    const zoomY = canvasH / roomSize.height;
+    const zoom = Math.min(zoomX, zoomY);
+    this.cameras.main.setZoom(zoom);
+    this.cameras.main.setBounds(roomSize.x, roomSize.y - roomSize.height, roomSize.width, roomSize.height);
   }
 
   #setupPlayer(): void {
@@ -636,9 +654,7 @@ export class GameScene extends Phaser.Scene {
       delay: CONFIG.ROOM_TRANSITION_PLAYER_INTO_HALL_DELAY,
     });
 
-    // animate camera to the next room based on the door positions
     const roomSize = this.#objectsByRoomId[targetDoor.roomId].room;
-    // reset camera bounds so we have a smooth transition
     this.cameras.main.setBounds(
       this.cameras.main.worldView.x,
       this.cameras.main.worldView.y,
@@ -647,6 +663,12 @@ export class GameScene extends Phaser.Scene {
     );
     this.cameras.main.stopFollow();
     const bounds = this.cameras.main.getBounds();
+    const canvasW = this.scale.width;
+    const canvasH = this.scale.height;
+    const zoomX = canvasW / roomSize.width;
+    const zoomY = canvasH / roomSize.height;
+    const targetZoom = Math.min(zoomX, zoomY);
+    this.cameras.main.setZoom(targetZoom);
     this.tweens.add({
       targets: bounds,
       x: roomSize.x,
